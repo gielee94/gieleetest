@@ -1,19 +1,41 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { useSelector } from 'react-redux';
+import { AppState } from './components/redux/types';
+
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import store from './components/redux/store';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+const MsalProvider = () => {
+  const tenantId = useSelector((state: AppState) => state.tenantId);
+
+  const pca = new PublicClientApplication({
+    auth: {
+      clientId: 'a6cc5516-6f85-48f5-b57a-60da9b229ab0',
+      authority: `https://login.microsoftonline.com/${tenantId}/`,
+      redirectUri: '/',
+    },
+    cache: {
+      cacheLocation: 'localStorage',
+      storeAuthStateInCookie: false,
+    },
+  });
+
+  return (
+    <Router>
+      <App msalInstance={pca} />
+    </Router>
+  );
+};
+
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+      <MsalProvider />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

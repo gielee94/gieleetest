@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/2ed0b260-e243-47a1-82ad-fb60ebfcf8dc/resourceGroups/webapprg/providers/Microsoft.Web/sites/gieleewebapp",
+    "appService.deploySubpath": "."
+}

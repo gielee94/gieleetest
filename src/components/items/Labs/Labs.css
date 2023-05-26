@@ -1,0 +1,36 @@
+/* labs.css */
+
+.labContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start; /* Add this line to align items to the left */
+}
+
+.labData-item {
+  width: calc(20% - 10px); /* Adjust the width and margin as needed */
+  margin: 5px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Add transition for smooth color change */
+}
+
+.labData-item:hover {
+  background-color: #e0e0e0; /* Change background color on hover */
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  .labData-item {
+    width: calc(33.33% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .labData-item {
+    width: calc(50% - 10px);
+  }
+}
